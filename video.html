@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <title>Invitation Video</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: radial-gradient(circle at top, rgba(255, 240, 220, 0.12), transparent 30%),
+          #060606;
+        color: #fff;
+      }
+
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .top-bar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        padding: 1rem 1.25rem;
+        background: rgba(6, 6, 6, 0.92);
+        border-bottom: 1px solid rgba(255, 215, 180, 0.16);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .timer {
+        font-size: 1.25rem;
+        letter-spacing: 0.04em;
+        color: #ffd9b6;
+      }
+
+      .nav-options {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .nav-button {
+        padding: 0.7rem 1rem;
+        border: 1px solid rgba(255, 215, 180, 0.35);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .nav-button:hover,
+      .nav-button.active {
+        background: rgba(255, 215, 180, 0.14);
+        border-color: rgba(255, 215, 180, 0.7);
+        transform: translateY(-1px);
+      }
+
+      .content {
+        flex: 1;
+        padding: 1.25rem;
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .video-card,
+      .info-card {
+        border-radius: 24px;
+        background: rgba(16, 16, 16, 0.84);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+      }
+
+      .video-card {
+        min-height: 320px;
+      }
+
+      .video-card video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .cards-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .info-card {
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 180px;
+      }
+
+      .info-card h2 {
+        margin: 0 0 0.75rem;
+        font-size: 1.15rem;
+        color: #ffd9b6;
+      }
+
+      .info-card p {
+        margin: 0;
+        line-height: 1.65;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      @media (max-width: 880px) {
+        .cards-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .top-bar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.75rem;
+        }
+
+        .nav-options {
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <div class="top-bar">
+        <div class="timer" id="timer">00:00:00</div>
+        <div class="nav-options">
+          <button class="nav-button active" data-section="invitation">Invitation</button>
+          <button class="nav-button" data-section="venue">Venue</button>
+          <button class="nav-button" data-section="schedule">Schedule</button>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="video-card">
+          <video controls playsinline>
+            <source src="WhatsApp Video 2026-07-06 at 6.41.57 AM.mp4" type="video/mp4" />
+            Your browser does not support HTML video.
+          </video>
+        </div>
+
+        <div class="cards-row">
+          <div class="info-card" id="invitation">
+            <h2>Invitation</h2>
+            <p>We are excited to invite you to our special celebration. Please join us for a warm and joyous gathering with friends and family.</p>
+          </div>
+          <div class="info-card" id="venue" style="display:none;">
+            <h2>Venue</h2>
+            <p>The ceremony will be held at a beautiful location with scenic surroundings. Exact address and arrival details will be shared here.</p>
+          </div>
+          <div class="info-card" id="schedule" style="display:none;">
+            <h2>Schedule</h2>
+            <p>The event begins at 10:00 AM with a welcoming reception, followed by the main ceremony and then a celebration meal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const timerEl = document.getElementById('timer');
+      const startTime = Date.now();
+
+      function updateTimer() {
+        const diff = Date.now() - startTime;
+        const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
+        const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+        const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        timerEl.textContent = `${hours}:${minutes}:${seconds}`;
+      }
+
+      setInterval(updateTimer, 1000);
+      updateTimer();
+
+      const buttons = document.querySelectorAll('.nav-button');
+      const sections = document.querySelectorAll('.info-card');
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          buttons.forEach((btn) => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          const section = button.dataset.section;
+          sections.forEach((card) => {
+            card.style.display = card.id === section ? 'flex' : 'none';
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
