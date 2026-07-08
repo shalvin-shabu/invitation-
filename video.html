@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#000000">
 
 <title>Holy Baptism Invitation</title>
@@ -14,26 +12,22 @@ content="width=device-width, initial-scale=1.0">
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html,
 body{
-
-width:100%;
-height:100%;
-overflow:hidden;
-font-family:'Cinzel',serif;
-
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:'Cinzel',serif;
 }
 
 body{
-
-background:#000;
-position:relative;
-
+    background:#000;
+    position:relative;
 }
 
 /* ===========================
@@ -41,76 +35,58 @@ position:relative;
 =========================== */
 
 .background{
+    position:fixed;
+    inset:0;
 
-position:absolute;
-
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-background:url("bg_image.jpeg") center center no-repeat;
-
-background-size:cover;
-
-animation:zoom 20s ease-in-out infinite alternate;
-
+    background:url("bg_image.jpeg") center center no-repeat;
+    background-size:cover;
 }
 
 /* ===========================
-   DARK OVERLAY
+   OVERLAY
 =========================== */
 
 .overlay{
+    position:absolute;
+    inset:0;
 
-position:absolute;
-
-inset:0;
-
-background:linear-gradient(
-
-rgba(0,0,0,.15),
-
-rgba(0,0,0,.35)
-
-);
-
+    background:linear-gradient(
+        rgba(0,0,0,.10),
+        rgba(0,0,0,.25)
+    );
 }
 
 /* ===========================
-   GOLDEN GLOW
+   GOLDEN LIGHT
 =========================== */
 
 .glow{
 
-position:absolute;
+    position:absolute;
 
-top:-20%;
+    top:0;
+    left:50%;
 
-left:50%;
+    transform:translateX(-50%);
 
-transform:translateX(-50%);
+    width:500px;
+    height:500px;
 
-width:600px;
+    border-radius:50%;
 
-height:600px;
+    background:radial-gradient(
 
-border-radius:50%;
+        circle,
 
-background:
+        rgba(255,220,140,.35),
 
-radial-gradient(circle,
+        transparent 70%
 
-rgba(255,220,140,.45),
+    );
 
-transparent 70%
+    filter:blur(40px);
 
-);
-
-filter:blur(40px);
-
-animation:glow 5s ease-in-out infinite;
+    animation:glow 5s ease-in-out infinite;
 
 }
 
@@ -120,133 +96,100 @@ animation:glow 5s ease-in-out infinite;
 
 .button-container{
 
-position:absolute;
+    position:absolute;
 
-bottom:45px;
+    bottom:40px;
 
-left:50%;
+    left:50%;
 
-transform:translateX(-50%);
+    transform:translateX(-50%);
 
-display:flex;
+    display:flex;
 
-gap:20px;
+    gap:18px;
 
-z-index:100;
+    z-index:10;
 
 }
 
 /* ===========================
-   BUTTON
+   BUTTON STYLE
 =========================== */
 
 .button-container button{
 
-padding:15px 28px;
+    padding:15px 28px;
 
-border:none;
+    border:none;
 
-border-radius:50px;
+    border-radius:50px;
 
-cursor:pointer;
+    background:rgba(255,255,255,.15);
 
-font-size:15px;
+    backdrop-filter:blur(12px);
 
-font-weight:bold;
+    -webkit-backdrop-filter:blur(12px);
 
-letter-spacing:1px;
+    color:white;
 
-color:white;
+    font-size:15px;
 
-background:rgba(255,255,255,.12);
+    font-weight:600;
 
-backdrop-filter:blur(14px);
+    letter-spacing:.5px;
 
-border:1px solid rgba(255,255,255,.25);
+    cursor:pointer;
 
-box-shadow:
+    transition:.3s;
 
-0 8px 25px rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.25);
 
-transition:.35s;
-
-font-family:'Cinzel',serif;
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.30);
 
 }
 
 .button-container button:hover{
 
-background:rgba(255,215,140,.25);
+    background:rgba(255,215,120,.30);
 
-transform:translateY(-4px);
+    transform:translateY(-3px);
 
-box-shadow:
-
-0 0 25px rgba(255,215,120,.5);
+    box-shadow:
+    0 0 20px rgba(255,215,120,.50);
 
 }
 
 .button-container button:active{
 
-transform:scale(.96);
+    transform:scale(.96);
 
 }
 
 /* ===========================
-   ANIMATIONS
+   GLOW ANIMATION
 =========================== */
-
-@keyframes zoom{
-
-0%{
-
-transform:scale(1);
-
-}
-
-100%{
-
-transform:scale(1.08);
-
-}
-
-}
 
 @keyframes glow{
 
 0%{
 
-opacity:.4;
-
-transform:
-
-translateX(-50%)
-
-scale(.9);
+opacity:.35;
+transform:translateX(-50%) scale(.95);
 
 }
 
 50%{
 
-opacity:.9;
-
-transform:
-
-translateX(-50%)
-
-scale(1.1);
+opacity:.75;
+transform:translateX(-50%) scale(1.05);
 
 }
 
 100%{
 
-opacity:.4;
-
-transform:
-
-translateX(-50%)
-
-scale(.9);
+opacity:.35;
+transform:translateX(-50%) scale(.95);
 
 }
 
@@ -260,25 +203,24 @@ scale(.9);
 
 .button-container{
 
-flex-direction:column;
+    width:90%;
 
-width:90%;
+    flex-direction:column;
 
 }
 
 .button-container button{
 
-width:100%;
+    width:100%;
 
-font-size:16px;
+    font-size:16px;
 
 }
 
 .glow{
 
-width:450px;
-
-height:450px;
+    width:350px;
+    height:350px;
 
 }
 
@@ -292,21 +234,15 @@ height:450px;
 
 <!-- Background Music -->
 
-<audio id="bgMusic" autoplay loop>
-
-<source src="bg_music.mpeg" type="audio/mpeg">
-
+<audio id="bgMusic" loop>
+    <source src="bg_music.mpeg" type="audio/mpeg">
 </audio>
 
 <!-- Background -->
 
 <div class="background"></div>
 
-<!-- Overlay -->
-
 <div class="overlay"></div>
-
-<!-- Golden Glow -->
 
 <div class="glow"></div>
 
@@ -330,23 +266,20 @@ height:450px;
 
 <script>
 
-window.addEventListener("load",()=>{
+// Play music after first interaction
+const music = document.getElementById("bgMusic");
 
-const music=document.getElementById("bgMusic");
+document.addEventListener("click", function(){
 
-music.volume=.6;
+    if(music.paused){
 
-music.play().catch(()=>{
+        music.volume = 0.6;
 
-document.body.addEventListener("click",()=>{
+        music.play();
 
-music.play();
+    }
 
 },{once:true});
-
-});
-
-});
 
 </script>
 
