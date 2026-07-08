@@ -232,6 +232,53 @@
         color: rgba(255, 255, 255, 0.82);
       }
 
+      /* ============ EVENT FLOW (schedule) ============ */
+      .event-flow {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+      }
+
+      .event-flow li {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .event-flow li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .ef-time {
+        font-family: 'Cinzel', serif;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        color: var(--gold);
+      }
+
+      .ef-desc {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.08rem;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .ef-closing {
+        margin-top: 0.35rem;
+        text-align: center;
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        color: var(--gold);
+      }
+
       @media (max-width: 540px) {
         .nav-button {
           font-size: 0.9rem;
@@ -290,8 +337,36 @@
             <source src="WhatsApp Video 2026-07-06 at 6.41.57 AM.mp4" type="video/mp4" />
           </video>
         </div>
+        <div class="info-card" id="schedule" style="display:none; align-items:stretch;">
+          <h2>Event Flow</h2>
+          <ul class="event-flow">
+            <li>
+              <span class="ef-time">🕞 3:30 PM — Baptism Ceremony at the Church</span>
+              <span class="ef-desc">Interested guests are welcome to join.</span>
+            </li>
+            <li>
+              <span class="ef-time">🎂 4:32 PM &amp; 4:33 PM — Birth Time Remembrance</span>
+              <span class="ef-desc">A special moment marking the birth times, followed by a small ceremony. Interested guests are welcome to attend.</span>
+            </li>
+            <li>
+              <span class="ef-time">☕ After the Church Ceremony</span>
+              <span class="ef-desc">Tea at Home for those interested in joining after the church ceremony.</span>
+            </li>
+            <li>
+              <span class="ef-time">🎉 6:30 PM Onwards — Birthday Blast at Royal Garden</span>
+            </li>
+            <li>
+              <span class="ef-time">🌟 7:00 PM — Stars of the Day Entry &amp; Cake Cutting</span>
+              <span class="ef-desc">All guests are requested to be present by 7:00 PM.</span>
+            </li>
+            <li>
+              <span class="ef-time">🍽️ Followed by</span>
+              <span class="ef-desc">Family Dinner • Entertainment • Fun • Games</span>
+            </li>
+          </ul>
+          <p class="ef-closing">Let's Celebrate the Day Together!<br>A James and Family Event</p>
+        </div>
 
-        
       </div>
     </div>
 
@@ -355,6 +430,10 @@
           sections.forEach((card) => {
             card.style.display = card.id === section ? 'flex' : 'none';
           });
+
+          // Hide the background video while the Schedule (or any info card) is open
+          document.querySelector('.video-card').style.display =
+            section === 'schedule' ? 'none' : 'block';
         });
       });
     </script>
