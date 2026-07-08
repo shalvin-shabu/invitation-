@@ -279,6 +279,79 @@
         color: var(--gold);
       }
 
+      /* ============ VENUE ============ */
+      .venue-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .venue-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .venue-block + .venue-block {
+        padding-top: 1.4rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .venue-heading {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        font-family: 'Cinzel', serif;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--gold);
+      }
+
+      .venue-heading .venue-time {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 0.95rem;
+        color: var(--gold-soft);
+        white-space: nowrap;
+      }
+
+      .venue-name {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      .venue-address {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .venue-directions {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.15rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid rgba(255, 217, 182, 0.45);
+        border-radius: 999px;
+        background: rgba(255, 217, 182, 0.08);
+        color: var(--gold);
+        font-family: Arial, sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        transition: background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .venue-directions:hover {
+        background: rgba(255, 217, 182, 0.18);
+        border-color: var(--gold);
+      }
+
       @media (max-width: 540px) {
         .nav-button {
           font-size: 0.9rem;
@@ -337,6 +410,33 @@
             <source src="WhatsApp Video 2026-07-06 at 6.41.57 AM.mp4" type="video/mp4" />
           </video>
         </div>
+        <div class="info-card" id="venue" style="display:none; align-items:stretch;">
+          <h2>Venue</h2>
+          <div class="venue-list">
+
+            <div class="venue-block">
+              <div class="venue-heading">
+                <span>⛪ Church Ceremony</span>
+                <span class="venue-time">3:30 PM</span>
+              </div>
+              <div class="venue-name">St. Joseph's Church, Kodakara</div>
+              <div class="venue-address">98C3+PHR, Kodakara, Thrissur, Kerala 680684, India</div>
+              <a class="venue-directions" href="https://www.google.com/maps/dir/?api=1&destination=St.+Joseph%27s+Church+Kodakara&destination_place_id=ChIJrbdvRrL5pzsRE1fMpwkcvCA" target="_blank" rel="noopener">📍 Get Directions</a>
+            </div>
+
+            <div class="venue-block">
+              <div class="venue-heading">
+                <span>🎉 Reception &amp; Dinner</span>
+                <span class="venue-time">6:00 – 10:00 PM</span>
+              </div>
+              <div class="venue-name">Royal Garden, Kuttikkad</div>
+              <div class="venue-address">Kallely Line, PO, Kuttikkad, Pariyaram, Kerala 680724, India</div>
+              <a class="venue-directions" href="https://www.google.com/maps/dir/?api=1&destination=Royal+Garden+Kuttikkad&destination_place_id=ChIJxbBg3MwBCDsRtklB870rN2g" target="_blank" rel="noopener">📍 Get Directions</a>
+            </div>
+
+          </div>
+        </div>
+
         <div class="info-card" id="schedule" style="display:none; align-items:stretch;">
           <h2>Event Flow</h2>
           <ul class="event-flow">
@@ -431,9 +531,9 @@
             card.style.display = card.id === section ? 'flex' : 'none';
           });
 
-          // Hide the background video while the Schedule (or any info card) is open
+          // Hide the background video while an info card (Venue/Schedule) is open
           document.querySelector('.video-card').style.display =
-            section === 'schedule' ? 'none' : 'block';
+            (section === 'schedule' || section === 'venue') ? 'none' : 'block';
         });
       });
     </script>
