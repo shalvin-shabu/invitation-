@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000" />
     <title>Invitation Video</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
     <style>
       :root {
         color-scheme: dark;
+        --gold: #ffd9b6;
+        --gold-soft: rgba(255, 217, 182, 0.55);
       }
 
       * {
@@ -29,45 +33,49 @@
         min-height: 100vh;
       }
 
+      /* ============ TOP BAR — full-width box tabs ============ */
       .top-bar {
         position: sticky;
         top: 0;
         z-index: 2;
-        padding: 1rem 1.25rem;
         background: rgba(6, 6, 6, 0.92);
         border-bottom: 1px solid rgba(255, 215, 180, 0.16);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .timer {
-        font-size: 1.25rem;
-        letter-spacing: 0.04em;
-        color: #ffd9b6;
       }
 
       .nav-options {
         display: flex;
-        gap: 0.75rem;
+        width: 100%;
       }
 
       .nav-button {
-        padding: 0.7rem 1rem;
-        border: 1px solid rgba(255, 215, 180, 0.35);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.05);
-        color: #fff;
-        font-size: 0.95rem;
+        flex: 1;
+        padding: 1rem 0.5rem;
+        border: none;
+        border-right: 1px solid rgba(255, 215, 180, 0.16);
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.03);
+        color: rgba(255, 255, 255, 0.75);
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.05rem;
+        letter-spacing: 0.03em;
         cursor: pointer;
-        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        transition: background 0.2s ease, color 0.2s ease;
       }
 
-      .nav-button:hover,
+      .nav-button:last-child {
+        border-right: none;
+      }
+
+      .nav-button:hover {
+        background: rgba(255, 215, 180, 0.08);
+        color: #fff;
+      }
+
       .nav-button.active {
         background: rgba(255, 215, 180, 0.14);
-        border-color: rgba(255, 215, 180, 0.7);
-        transform: translateY(-1px);
+        color: var(--gold);
+        box-shadow: inset 0 -2px 0 var(--gold);
       }
 
       .content {
@@ -75,18 +83,115 @@
         padding: 1.25rem;
         display: grid;
         gap: 1.25rem;
+        max-width: 720px;
+        margin: 0 auto;
+        width: 100%;
       }
 
-      .video-card,
-      .info-card {
+      /* ============ COUNTDOWN CARD ============ */
+      .countdown-card {
+        position: relative;
+        border-radius: 24px;
+        background: rgba(16, 16, 16, 0.84);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+        padding: 1.5rem 1.25rem 1.35rem;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .countdown-card::before {
+        content: '';
+        position: absolute;
+        top: -60%;
+        left: 50%;
+        width: 260px;
+        height: 260px;
+        transform: translateX(-50%);
+        background: radial-gradient(circle, rgba(255, 217, 182, 0.18), transparent 70%);
+        animation: cdGlow 4s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      @keyframes cdGlow {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+
+      .cd-orn {
+        position: relative;
+        color: var(--gold);
+        font-size: 0.8rem;
+        letter-spacing: 0.3em;
+        margin-bottom: 0.85rem;
+      }
+
+      .cd-row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .cd-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0.9rem;
+        min-width: 56px;
+      }
+
+      .cd-num {
+        font-family: 'Cinzel', serif;
+        font-weight: 700;
+        font-size: clamp(24px, 6vw, 34px);
+        color: #fff;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+        text-shadow: 0 0 14px rgba(255, 217, 182, 0.35);
+      }
+
+      .cd-label {
+        margin-top: 0.4rem;
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .cd-sep {
+        font-family: 'Cinzel', serif;
+        font-size: 1.4rem;
+        color: var(--gold-soft);
+        align-self: flex-start;
+        margin-top: 0.1rem;
+        animation: cdBlink 1.4s ease-in-out infinite;
+      }
+
+      @keyframes cdBlink {
+        0%, 100% { opacity: 0.25; }
+        50% { opacity: 1; }
+      }
+
+      .cd-underline {
+        margin-top: 1rem;
+        width: 70%;
+        height: 1px;
+        margin-inline: auto;
+        background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+      }
+
+      /* ============ BACKGROUND VIDEO — silent, autoplaying, no controls ============ */
+      .video-card {
+        position: relative;
         border-radius: 24px;
         background: rgba(16, 16, 16, 0.84);
         border: 1px solid rgba(255, 255, 255, 0.08);
         box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
         overflow: hidden;
-      }
-
-      .video-card {
         min-height: 320px;
       }
 
@@ -95,15 +200,16 @@
         height: 100%;
         display: block;
         object-fit: cover;
-      }
-
-      .cards-row {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
+        pointer-events: none; /* removes any click-to-pause / native control interaction */
       }
 
       .info-card {
+        position: relative;
+        border-radius: 24px;
+        background: rgba(16, 16, 16, 0.84);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
         padding: 1.25rem;
         display: flex;
         flex-direction: column;
@@ -113,32 +219,28 @@
 
       .info-card h2 {
         margin: 0 0 0.75rem;
+        font-family: 'Cinzel', serif;
         font-size: 1.15rem;
-        color: #ffd9b6;
+        color: var(--gold);
       }
 
       .info-card p {
         margin: 0;
         line-height: 1.65;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.1rem;
         color: rgba(255, 255, 255, 0.82);
       }
 
-      @media (max-width: 880px) {
-        .cards-row {
-          grid-template-columns: 1fr;
-        }
-      }
-
       @media (max-width: 540px) {
-        .top-bar {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.75rem;
+        .nav-button {
+          font-size: 0.9rem;
+          padding: 0.85rem 0.35rem;
         }
 
-        .nav-options {
-          width: 100%;
-          justify-content: space-between;
+        .cd-unit {
+          padding: 0 0.6rem;
+          min-width: 48px;
         }
       }
     </style>
@@ -146,7 +248,6 @@
   <body>
     <div class="page-container">
       <div class="top-bar">
-        <div class="timer" id="timer">00:00:00</div>
         <div class="nav-options">
           <button class="nav-button active" data-section="invitation">Invitation</button>
           <button class="nav-button" data-section="venue">Venue</button>
@@ -155,14 +256,42 @@
       </div>
 
       <div class="content">
+
+        <!-- ============ COUNTDOWN TO THE EVENT ============ -->
+        <div class="countdown-card">
+          <div class="cd-orn">✝ ⋆ ✝</div>
+          <div class="cd-row">
+            <div class="cd-unit">
+              <div class="cd-num" id="cd-days">00</div>
+              <div class="cd-label">Days</div>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit">
+              <div class="cd-num" id="cd-hours">00</div>
+              <div class="cd-label">Hrs</div>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit">
+              <div class="cd-num" id="cd-mins">00</div>
+              <div class="cd-label">Min</div>
+            </div>
+            <div class="cd-sep">:</div>
+            <div class="cd-unit">
+              <div class="cd-num" id="cd-secs">00</div>
+              <div class="cd-label">Sec</div>
+            </div>
+          </div>
+          <div class="cd-underline"></div>
+        </div>
+
+        <!-- Background video: muted, autoplaying, looping, no controls of any kind -->
         <div class="video-card">
-          <video controls playsinline>
+          <video autoplay muted loop playsinline disablepictureinpicture disableremoteplayback>
             <source src="WhatsApp Video 2026-07-06 at 6.41.57 AM.mp4" type="video/mp4" />
-            Your browser does not support HTML video.
           </video>
         </div>
 
-        <div class="cards-row">
+        <div class="cards-row" style="display:grid; gap:1.25rem;">
           <div class="info-card" id="invitation">
             <h2>Invitation</h2>
             <p>We are excited to invite you to our special celebration. Please join us for a warm and joyous gathering with friends and family.</p>
@@ -179,30 +308,63 @@
       </div>
     </div>
 
-    <script>
-      const timerEl = document.getElementById('timer');
-      const startTime = Date.now();
+    <!-- ============================================================
+         YOUTUBE AUDIO SLOT — leave YT_AUDIO_ID empty for now.
+         When you give me the YouTube link, I'll drop the video ID
+         in here and this will quietly play just the audio in the
+         background (no video shown, no player controls visible).
+         ============================================================ -->
+    <div id="ytAudioHolder" style="position:fixed; width:1px; height:1px; overflow:hidden; bottom:0; left:0; opacity:0;"></div>
 
-      function updateTimer() {
-        const diff = Date.now() - startTime;
-        const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
-        const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-        const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-        timerEl.textContent = `${hours}:${minutes}:${seconds}`;
+    <script>
+      // ============ COUNTDOWN LOGIC ============
+      // EDIT ME: set the real ceremony date & time here
+      const CD_EVENT_DATE = new Date('2026-09-08T10:00:00');
+
+      function updateCountdown() {
+        const now = new Date();
+        let diff = CD_EVENT_DATE - now;
+        if (diff < 0) diff = 0;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
+        document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+        document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+        document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // ============ YOUTUBE AUDIO (fill in later) ============
+      // EDIT ME: paste the YouTube video ID here once you have the link, e.g. 'prSoiiwnJXY'
+      const YT_AUDIO_ID = '';
+
+      if (YT_AUDIO_ID) {
+        document.getElementById('ytAudioHolder').innerHTML =
+          '<iframe width="1" height="1" ' +
+          'src="https://www.youtube.com/embed/' + YT_AUDIO_ID + '?autoplay=1&mute=0&loop=1&playlist=' + YT_AUDIO_ID + '&controls=0&playsinline=1" ' +
+          'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
       }
 
-      setInterval(updateTimer, 1000);
-      updateTimer();
-
+      // ============ NAV TABS ============
       const buttons = document.querySelectorAll('.nav-button');
       const sections = document.querySelectorAll('.info-card');
 
       buttons.forEach((button) => {
         button.addEventListener('click', () => {
+          const section = button.dataset.section;
+
+          // Navigate to image page if invitation is clicked
+          if (section === 'invitation') {
+            window.location.href = 'invitation-image.html';
+            return;
+          }
+
           buttons.forEach((btn) => btn.classList.remove('active'));
           button.classList.add('active');
 
-          const section = button.dataset.section;
           sections.forEach((card) => {
             card.style.display = card.id === section ? 'flex' : 'none';
           });
