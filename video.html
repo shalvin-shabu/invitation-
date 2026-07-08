@@ -1,553 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000000" />
-    <title>Invitation Video</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        color-scheme: dark;
-        --gold: #ffd9b6;
-        --gold-soft: rgba(255, 217, 182, 0.55);
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-      * {
-        box-sizing: border-box;
-      }
+<meta name="theme-color" content="#000000">
 
-      body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-        background: radial-gradient(circle at top, rgba(255, 240, 220, 0.12), transparent 30%),
-          #060606;
-        color: #fff;
-      }
+<title>Holy Baptism Invitation</title>
 
-      .page-container {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
 
-      /* ============ TOP BAR — full-width box tabs ============ */
-      .top-bar {
-        position: sticky;
-        top: 0;
-        z-index: 2;
-        background: rgba(6, 6, 6, 0.92);
-        border-bottom: 1px solid rgba(255, 215, 180, 0.16);
-      }
+<style>
 
-      .nav-options {
-        display: flex;
-        width: 100%;
-      }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-      .nav-button {
-        flex: 1;
-        padding: 1rem 0.5rem;
-        border: none;
-        border-right: 1px solid rgba(255, 215, 180, 0.16);
-        border-radius: 0;
-        background: rgba(255, 255, 255, 0.03);
-        color: rgba(255, 255, 255, 0.75);
-        font-family: 'Cormorant Garamond', serif;
-        font-style: italic;
-        font-size: 1.05rem;
-        letter-spacing: 0.03em;
-        cursor: pointer;
-        transition: background 0.2s ease, color 0.2s ease;
-      }
+html,
+body{
 
-      .nav-button:last-child {
-        border-right: none;
-      }
+width:100%;
+height:100%;
+overflow:hidden;
+font-family:'Cinzel',serif;
 
-      .nav-button:hover {
-        background: rgba(255, 215, 180, 0.08);
-        color: #fff;
-      }
+}
 
-      .nav-button.active {
-        background: rgba(255, 215, 180, 0.14);
-        color: var(--gold);
-        box-shadow: inset 0 -2px 0 var(--gold);
-      }
+body{
 
-      .content {
-        flex: 1;
-        padding: 1.25rem;
-        display: grid;
-        gap: 1.25rem;
-        max-width: 720px;
-        margin: 0 auto;
-        width: 100%;
-      }
+background:#000;
+position:relative;
 
-      /* ============ COUNTDOWN CARD ============ */
-      .countdown-card {
-        position: relative;
-        border-radius: 24px;
-        background: rgba(16, 16, 16, 0.84);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
-        padding: 1.5rem 1.25rem 1.35rem;
-        text-align: center;
-        overflow: hidden;
-      }
+}
 
-      .countdown-card::before {
-        content: '';
-        position: absolute;
-        top: -60%;
-        left: 50%;
-        width: 260px;
-        height: 260px;
-        transform: translateX(-50%);
-        background: radial-gradient(circle, rgba(255, 217, 182, 0.18), transparent 70%);
-        animation: cdGlow 4s ease-in-out infinite;
-        pointer-events: none;
-      }
+/* ===========================
+   BACKGROUND IMAGE
+=========================== */
 
-      @keyframes cdGlow {
-        0%, 100% { opacity: 0.5; }
-        50% { opacity: 1; }
-      }
+.background{
 
-      .cd-orn {
-        position: relative;
-        color: var(--gold);
-        font-size: 0.8rem;
-        letter-spacing: 0.3em;
-        margin-bottom: 0.85rem;
-      }
+position:absolute;
 
-      .cd-row {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+top:0;
+left:0;
 
-      .cd-unit {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0 0.9rem;
-        min-width: 56px;
-      }
+width:100%;
+height:100%;
 
-      .cd-num {
-        font-family: 'Cinzel', serif;
-        font-weight: 700;
-        font-size: clamp(24px, 6vw, 34px);
-        color: #fff;
-        line-height: 1;
-        font-variant-numeric: tabular-nums;
-        text-shadow: 0 0 14px rgba(255, 217, 182, 0.35);
-      }
+background:url("bg_image.jpeg") center center no-repeat;
 
-      .cd-label {
-        margin-top: 0.4rem;
-        font-family: 'Cormorant Garamond', serif;
-        font-style: italic;
-        font-size: 0.72rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--gold);
-      }
+background-size:cover;
 
-      .cd-sep {
-        font-family: 'Cinzel', serif;
-        font-size: 1.4rem;
-        color: var(--gold-soft);
-        align-self: flex-start;
-        margin-top: 0.1rem;
-        animation: cdBlink 1.4s ease-in-out infinite;
-      }
+animation:zoom 20s ease-in-out infinite alternate;
 
-      @keyframes cdBlink {
-        0%, 100% { opacity: 0.25; }
-        50% { opacity: 1; }
-      }
+}
 
-      .cd-underline {
-        margin-top: 1rem;
-        width: 70%;
-        height: 1px;
-        margin-inline: auto;
-        background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
-      }
+/* ===========================
+   DARK OVERLAY
+=========================== */
 
-      /* ============ BACKGROUND VIDEO — silent, autoplaying, no controls ============ */
-      .video-card {
-        position: relative;
-        border-radius: 24px;
-        background: rgba(16, 16, 16, 0.84);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
-        overflow: hidden;
-        min-height: 320px;
-      }
+.overlay{
 
-      .video-card video {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-        pointer-events: none; /* removes any click-to-pause / native control interaction */
-      }
+position:absolute;
 
-      .info-card {
-        position: relative;
-        border-radius: 24px;
-        background: rgba(16, 16, 16, 0.84);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
-        overflow: hidden;
-        padding: 1.25rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 180px;
-      }
+inset:0;
 
-      .info-card h2 {
-        margin: 0 0 0.75rem;
-        font-family: 'Cinzel', serif;
-        font-size: 1.15rem;
-        color: var(--gold);
-      }
+background:linear-gradient(
 
-      .info-card p {
-        margin: 0;
-        line-height: 1.65;
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.1rem;
-        color: rgba(255, 255, 255, 0.82);
-      }
+rgba(0,0,0,.15),
 
-      /* ============ EVENT FLOW (schedule) ============ */
-      .event-flow {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 1.1rem;
-      }
+rgba(0,0,0,.35)
 
-      .event-flow li {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      }
+);
 
-      .event-flow li:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
+}
 
-      .ef-time {
-        font-family: 'Cinzel', serif;
-        font-size: 1rem;
-        font-weight: 600;
-        letter-spacing: 0.01em;
-        color: var(--gold);
-      }
+/* ===========================
+   GOLDEN GLOW
+=========================== */
 
-      .ef-desc {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.08rem;
-        line-height: 1.55;
-        color: rgba(255, 255, 255, 0.82);
-      }
+.glow{
 
-      .ef-closing {
-        margin-top: 0.35rem;
-        text-align: center;
-        font-family: 'Cormorant Garamond', serif;
-        font-style: italic;
-        font-size: 1.15rem;
-        color: var(--gold);
-      }
+position:absolute;
 
-      /* ============ VENUE ============ */
-      .venue-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-      }
+top:-20%;
 
-      .venue-block {
-        display: flex;
-        flex-direction: column;
-        gap: 0.6rem;
-      }
+left:50%;
 
-      .venue-block + .venue-block {
-        padding-top: 1.4rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-      }
+transform:translateX(-50%);
 
-      .venue-heading {
-        display: flex;
-        align-items: baseline;
-        gap: 0.5rem;
-        font-family: 'Cinzel', serif;
-        font-size: 1.05rem;
-        font-weight: 600;
-        color: var(--gold);
-      }
+width:600px;
 
-      .venue-heading .venue-time {
-        font-family: 'Cormorant Garamond', serif;
-        font-style: italic;
-        font-size: 0.95rem;
-        color: var(--gold-soft);
-        white-space: nowrap;
-      }
+height:600px;
 
-      .venue-name {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: #fff;
-      }
+border-radius:50%;
 
-      .venue-address {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1rem;
-        line-height: 1.5;
-        color: rgba(255, 255, 255, 0.75);
-      }
+background:
 
-      .venue-directions {
-        align-self: flex-start;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        margin-top: 0.15rem;
-        padding: 0.5rem 1rem;
-        border: 1px solid rgba(255, 217, 182, 0.45);
-        border-radius: 999px;
-        background: rgba(255, 217, 182, 0.08);
-        color: var(--gold);
-        font-family: Arial, sans-serif;
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        text-decoration: none;
-        transition: background 0.2s ease, border-color 0.2s ease;
-      }
+radial-gradient(circle,
 
-      .venue-directions:hover {
-        background: rgba(255, 217, 182, 0.18);
-        border-color: var(--gold);
-      }
+rgba(255,220,140,.45),
 
-      @media (max-width: 540px) {
-        .nav-button {
-          font-size: 0.9rem;
-          padding: 0.85rem 0.35rem;
-        }
+transparent 70%
 
-        .cd-unit {
-          padding: 0 0.6rem;
-          min-width: 48px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <audio id="bgMusic" autoplay loop>
-    <source src="bg_music.mpeg" type="audio/mpeg">
-    Your browser does not support the audio element.
+);
+
+filter:blur(40px);
+
+animation:glow 5s ease-in-out infinite;
+
+}
+
+/* ===========================
+   BUTTON CONTAINER
+=========================== */
+
+.button-container{
+
+position:absolute;
+
+bottom:45px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+display:flex;
+
+gap:20px;
+
+z-index:100;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.button-container button{
+
+padding:15px 28px;
+
+border:none;
+
+border-radius:50px;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:bold;
+
+letter-spacing:1px;
+
+color:white;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(14px);
+
+border:1px solid rgba(255,255,255,.25);
+
+box-shadow:
+
+0 8px 25px rgba(0,0,0,.35);
+
+transition:.35s;
+
+font-family:'Cinzel',serif;
+
+}
+
+.button-container button:hover{
+
+background:rgba(255,215,140,.25);
+
+transform:translateY(-4px);
+
+box-shadow:
+
+0 0 25px rgba(255,215,120,.5);
+
+}
+
+.button-container button:active{
+
+transform:scale(.96);
+
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+
+@keyframes zoom{
+
+0%{
+
+transform:scale(1);
+
+}
+
+100%{
+
+transform:scale(1.08);
+
+}
+
+}
+
+@keyframes glow{
+
+0%{
+
+opacity:.4;
+
+transform:
+
+translateX(-50%)
+
+scale(.9);
+
+}
+
+50%{
+
+opacity:.9;
+
+transform:
+
+translateX(-50%)
+
+scale(1.1);
+
+}
+
+100%{
+
+opacity:.4;
+
+transform:
+
+translateX(-50%)
+
+scale(.9);
+
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.button-container{
+
+flex-direction:column;
+
+width:90%;
+
+}
+
+.button-container button{
+
+width:100%;
+
+font-size:16px;
+
+}
+
+.glow{
+
+width:450px;
+
+height:450px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Background Music -->
+
+<audio id="bgMusic" autoplay loop>
+
+<source src="bg_music.mpeg" type="audio/mpeg">
+
 </audio>
-    <div class="page-container">
-      <div class="top-bar">
-        <div class="nav-options">
-          <button class="nav-button active" data-section="invitation">Invitation</button>
-          <button class="nav-button" data-section="venue">Venue</button>
-          <button class="nav-button" data-section="schedule">Event Flow</button>
-        </div>
-      </div>
 
-      <div class="content">
+<!-- Background -->
 
-        <!-- ============ COUNTDOWN TO THE EVENT ============ -->
-        <div class="countdown-card">
-          <div class="cd-orn">✝ ⋆ ✝</div>
-          <div class="cd-row">
-            <div class="cd-unit">
-              <div class="cd-num" id="cd-days">00</div>
-              <div class="cd-label">Days</div>
-            </div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit">
-              <div class="cd-num" id="cd-hours">00</div>
-              <div class="cd-label">Hrs</div>
-            </div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit">
-              <div class="cd-num" id="cd-mins">00</div>
-              <div class="cd-label">Min</div>
-            </div>
-            <div class="cd-sep">:</div>
-            <div class="cd-unit">
-              <div class="cd-num" id="cd-secs">00</div>
-              <div class="cd-label">Sec</div>
-            </div>
-          </div>
-          <div class="cd-underline"></div>
-        </div>
+<div class="background"></div>
 
-        <!-- Background video: muted, autoplaying, looping, no controls of any kind -->
-        <div class="video-card">
-          <video autoplay muted loop playsinline disablepictureinpicture disableremoteplayback>
-            <source src="bg_video.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="info-card" id="venue" style="display:none; align-items:stretch;">
-          <h2>Venue</h2>
-          <div class="venue-list">
+<!-- Overlay -->
 
-            <div class="venue-block">
-              <div class="venue-heading">
-                <span>⛪ Church Ceremony</span>
-                <span class="venue-time">3:30 PM</span>
-              </div>
-              <div class="venue-name">St. Joseph's Church, Kodakara</div>
-              <div class="venue-address">98C3+PHR, Kodakara, Thrissur, Kerala 680684, India</div>
-              <a class="venue-directions" href="https://www.google.com/maps/dir/?api=1&destination=St.+Joseph%27s+Church+Kodakara&destination_place_id=ChIJrbdvRrL5pzsRE1fMpwkcvCA" target="_blank" rel="noopener">📍 Get Directions</a>
-            </div>
+<div class="overlay"></div>
 
-            <div class="venue-block">
-              <div class="venue-heading">
-                <span>🎉 Reception &amp; Dinner</span>
-                <span class="venue-time">6:00 – 10:00 PM</span>
-              </div>
-              <div class="venue-name">Royal Garden, Kuttikkad</div>
-              <div class="venue-address">Kallely Line, PO, Kuttikkad, Pariyaram, Kerala 680724, India</div>
-              <a class="venue-directions" href="https://www.google.com/maps/dir/?api=1&destination=Royal+Garden+Kuttikkad&destination_place_id=ChIJxbBg3MwBCDsRtklB870rN2g" target="_blank" rel="noopener">📍 Get Directions</a>
-            </div>
+<!-- Golden Glow -->
 
-          </div>
-        </div>
+<div class="glow"></div>
 
-        <div class="info-card" id="schedule" style="display:none; align-items:stretch;">
-          <h2>Event Flow</h2>
-          <ul class="event-flow">
-            <li>
-              <span class="ef-time">🕞 3:30 PM — Baptism Ceremony at the Church</span>
-              <span class="ef-desc">Interested guests are welcome to join.</span>
-            </li>
-            <li>
-              <span class="ef-time">🎂 4:32 PM &amp; 4:33 PM — Birth Time Remembrance</span>
-              <span class="ef-desc">A special moment marking the birth times, followed by a small ceremony. Interested guests are welcome to attend.</span>
-            </li>
-            <li>
-              <span class="ef-time">☕ After the Church Ceremony</span>
-              <span class="ef-desc">Tea at Home for those interested in joining after the church ceremony.</span>
-            </li>
-            <li>
-              <span class="ef-time">🎉 6:30 PM Onwards — Birthday Blast at Royal Garden</span>
-            </li>
-            <li>
-              <span class="ef-time">🌟 7:00 PM — Stars of the Day Entry &amp; Cake Cutting</span>
-              <span class="ef-desc">All guests are requested to be present by 7:00 PM.</span>
-            </li>
-            <li>
-              <span class="ef-time">🍽️ Followed by</span>
-              <span class="ef-desc">Family Dinner • Entertainment • Fun • Games</span>
-            </li>
-          </ul>
-          <p class="ef-closing">Let's Celebrate the Day Together!<br>A James and Family Event</p>
-        </div>
+<!-- Buttons -->
 
-      </div>
-    </div>
+<div class="button-container">
 
-    <!-- ============================================================
-         YOUTUBE AUDIO SLOT — leave YT_AUDIO_ID empty for now.
-         When you give me the YouTube link, I'll drop the video ID
-         in here and this will quietly play just the audio in the
-         background (no video shown, no player controls visible).
-         ============================================================ -->
-    <div id="ytAudioHolder" style="position:fixed; width:1px; height:1px; overflow:hidden; bottom:0; left:0; opacity:0;"></div>
+    <button onclick="window.location.href='invitation-image.html'">
+        ✉ Invitation
+    </button>
 
-    <script>
-      // ============ COUNTDOWN LOGIC ============
-      // EDIT ME: set the real ceremony date & time here
-      const CD_EVENT_DATE = new Date('2026-09-08T10:00:00');
+    <button onclick="window.location.href='map_image.html'">
+        📍 Maps
+    </button>
 
-      function updateCountdown() {
-        const now = new Date();
-        let diff = CD_EVENT_DATE - now;
-        if (diff < 0) diff = 0;
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / (1000 * 60)) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-        document.getElementById('cd-days').textContent = String(d).padStart(2, '0');
-        document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
-        document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
-        document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
-      }
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
+    <button onclick="window.location.href='event_image.html'">
+        📅 Event Flow
+    </button>
 
-      // ============ BACKGROUND MUSIC ============
-window.addEventListener("load", () => {
-    const music = document.getElementById("bgMusic");
+</div>
 
-    music.volume = 1.0;
+<script>
 
-    music.play().catch(() => {
-        document.addEventListener(
-            "click",
-            () => {
-                music.play();
-            },
-            { once: true }
-        );
-    });
+window.addEventListener("load",()=>{
+
+const music=document.getElementById("bgMusic");
+
+music.volume=.6;
+
+music.play().catch(()=>{
+
+document.body.addEventListener("click",()=>{
+
+music.play();
+
+},{once:true});
+
 });
 
-      
+});
 
-      // ============ NAV TABS ============
-      const buttons = document.querySelectorAll('.nav-button');
-      const sections = document.querySelectorAll('.info-card');
+</script>
 
-      buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-          const section = button.dataset.section;
-
-          // Navigate to image page if invitation is clicked
-          if (section === 'invitation') {
-            window.location.href = 'invitation-image.html';
-            return;
-          }
-
-          buttons.forEach((btn) => btn.classList.remove('active'));
-          button.classList.add('active');
-
-          sections.forEach((card) => {
-            card.style.display = card.id === section ? 'flex' : 'none';
-          });
-
-          // Hide the background video while an info card (Venue/Schedule) is open
-          document.querySelector('.video-card').style.display =
-            (section === 'schedule' || section === 'venue') ? 'none' : 'block';
-        });
-      });
-    </script>
-  </body>
+</body>
 </html>
