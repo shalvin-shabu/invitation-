@@ -366,6 +366,10 @@
     </style>
   </head>
   <body>
+    <audio id="bgMusic" autoplay loop>
+    <source src="bg_music.mpeg" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
     <div class="page-container">
       <div class="top-bar">
         <div class="nav-options">
@@ -499,34 +503,24 @@
       updateCountdown();
       setInterval(updateCountdown, 1000);
 
-      // ============ YOUTUBE AUDIO (background music, loops continuously) ============
-      const YT_AUDIO_ID = 'prSoiiwnJXw';
-      let ytPlayerFrame = null;
+      // ============ BACKGROUND MUSIC ============
+window.addEventListener("load", () => {
+    const music = document.getElementById("bgMusic");
 
-      if (YT_AUDIO_ID) {
-        document.getElementById('ytAudioHolder').innerHTML =
-          '<iframe id="ytAudioFrame" width="1" height="1" ' +
-          'src="https://www.youtube.com/embed/' + YT_AUDIO_ID +
-          '?autoplay=1&mute=1&loop=1&playlist=' + YT_AUDIO_ID +
-          '&controls=0&playsinline=1&enablejsapi=1" ' +
-          'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+    music.volume = 1.0;
 
-        ytPlayerFrame = document.getElementById('ytAudioFrame');
+    music.play().catch(() => {
+        document.addEventListener(
+            "click",
+            () => {
+                music.play();
+            },
+            { once: true }
+        );
+    });
+});
 
-        // Browsers block autoplay-with-sound until the visitor interacts with the page.
-        // We start muted (always allowed) then unmute on the very first tap/click,
-        // so the music keeps playing continuously and picks up sound right away.
-        function unmuteAudio() {
-          if (ytPlayerFrame && ytPlayerFrame.contentWindow) {
-            ytPlayerFrame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
-            ytPlayerFrame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo', args: [] }), '*');
-          }
-          document.removeEventListener('click', unmuteAudio);
-          document.removeEventListener('touchstart', unmuteAudio);
-        }
-        document.addEventListener('click', unmuteAudio, { once: true });
-        document.addEventListener('touchstart', unmuteAudio, { once: true });
-      }
+      
 
       // ============ NAV TABS ============
       const buttons = document.querySelectorAll('.nav-button');
