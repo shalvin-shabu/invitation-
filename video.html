@@ -243,13 +243,139 @@ transform:translateX(-50%) scale(.95);
 
 }
 
+/*==========================================
+    COUNTDOWN STYLES (Elegant & Responsive)
+============================================*/
+
+.countdown-section {
+    position: absolute;
+    left: 50%;
+    top: 63%;
+    transform: translateX(-50%);
+    width: 92%;
+    text-align: center;
+    z-index: 20;
+    font-family: 'Cinzel', serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Ornaments above and below title */
+.countdown-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #2b1b0d;
+    margin-bottom: 22px;
+    text-shadow: 0 0 8px rgba(255, 240, 200, 0.8), 0 0 2px rgba(196, 155, 63, 0.5);
+    text-transform: uppercase;
+}
+
+.countdown-title::before,
+.countdown-title::after {
+    content: "";
+    display: block;
+    width: 140px;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(196, 155, 63, 0.9) 30%,
+        rgba(255, 225, 160, 1) 50%,
+        rgba(196, 155, 63, 0.9) 70%,
+        transparent
+    );
+    margin: 10px auto;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.time-box {
+    width: 60px;
+    /* Prevents layout shifting when numbers change width */
+    font-variant-numeric: tabular-nums; 
+}
+
+.time-box span {
+    display: block;
+    font-size: 50px;
+    line-height: 0.85;
+    color: #2b1608;
+    font-weight: 500;
+    letter-spacing: -1px;
+    text-shadow: 0 0 14px rgba(255, 240, 210, 0.85), 0 2px 3px rgba(43, 22, 8, 0.15);
+}
+
+.time-box small {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #402715;
+    letter-spacing: 2px;
+}
+
+/* Vertical Gold Dividers */
+.divider {
+    width: 1px;
+    height: 85px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(196, 155, 63, 0.6) 20%,
+        rgba(196, 155, 63, 0.6) 80.,
+        transparent
+    );
+    align-self: center;
+}
+
+/* Responsive Overrides */
 @media(max-width:768px){
 
 .glow{
-
     width:350px;
     height:350px;
+}
 
+.countdown-section {
+    top: 61%;
+}
+
+#countdown {
+    gap: 12px;
+}
+
+.time-box {
+    width: 65px;
+}
+
+.time-box span {
+    font-size: 54px;
+}
+
+.time-box small {
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 8px;
+}
+
+.divider {
+    height: 60px;
+}
+
+.countdown-title {
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+.countdown-title::before,
+.countdown-title::after {
+    width: 100px;
 }
 
 }
@@ -277,6 +403,47 @@ transform:translateX(-50%) scale(.95);
     <button class="card-btn maps" onclick="window.location.href='map_image.html'" aria-label="Maps"></button>
 
     <button class="card-btn event-flow" onclick="window.location.href='event_image.html'" aria-label="Event Flow"></button>
+
+</div>
+
+<!-- ==========================================
+     COUNTDOWN SECTION (Inserted below the buttons)
+     ========================================== -->
+<div class="countdown-section">
+
+    <div class="countdown-title">
+        TIME COUNTDOWN
+    </div>
+
+    <div id="countdown">
+
+        <div class="time-box">
+            <span id="days">00</span>
+            <small>DAYS</small>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="time-box">
+            <span id="hours">00</span>
+            <small>HOURS</small>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <small>MINUTES</small>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <small>SECONDS</small>
+        </div>
+
+    </div>
 
 </div>
 
@@ -322,6 +489,50 @@ document.querySelectorAll(".card-btn").forEach(function(btn){
     });
 
 });
+
+/*==========================================
+    COUNTDOWN CORE ENGINE
+============================================*/
+(function() {
+    // Target Countdown Date
+    const targetDate = new Date("September 8, 2026 00:00:00").getTime();
+
+    // Cache elements to save DOM lookup performance
+    const elDays = document.getElementById("days");
+    const elHours = document.getElementById("hours");
+    const elMinutes = document.getElementById("minutes");
+    const elSeconds = document.getElementById("seconds");
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance <= 0) {
+            if (elDays) elDays.textContent = "00";
+            if (elHours) elHours.textContent = "00";
+            if (elMinutes) elMinutes.textContent = "00";
+            if (elSeconds) elSeconds.textContent = "00";
+            clearInterval(timerInterval);
+            return;
+        }
+
+        // Calculations
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Format to double digits
+        if (elDays) elDays.textContent = String(days).padStart(2, "0");
+        if (elHours) elHours.textContent = String(hours).padStart(2, "0");
+        if (elMinutes) elMinutes.textContent = String(minutes).padStart(2, "0");
+        if (elSeconds) elSeconds.textContent = String(seconds).padStart(2, "0");
+    }
+
+    // Run instantly on initialization, then set interval
+    updateCountdown();
+    const timerInterval = setInterval(updateCountdown, 1000);
+})();
 
 </script>
 
