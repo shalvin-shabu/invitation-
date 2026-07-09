@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <meta name="theme-color" content="#000000">
+
 <title>Venue Map</title>
 
 <style>
-
-:root{
-    color-scheme: dark;
-}
 
 *{
     margin:0;
@@ -18,68 +17,64 @@
     box-sizing:border-box;
 }
 
+html,
 body{
 
-    min-height:100vh;
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
 
     background:#000;
 
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:20px;
-
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 
 }
-
-/* Container */
 
 .container{
 
-    width:100%;
-    max-width:900px;
+    width:100vw;
+    height:100vh;
 
 }
-
-/* Image */
 
 .image-container{
 
     position:relative;
 
-    border-radius:24px;
+    width:100%;
+    height:100%;
 
     overflow:hidden;
-
-    box-shadow:0 25px 80px rgba(0,0,0,.55);
-
-    filter:brightness(1.15);
 
 }
 
 .image-container img{
 
     width:100%;
+    height:100%;
+
+    object-fit:contain;
 
     display:block;
 
+    filter:brightness(1.15);
+
 }
 
-/* Close Button */
+/* ============================
+   CLOSE BUTTON
+============================ */
 
 .close-button{
 
     position:absolute;
 
-    top:18px;
-    right:18px;
+    top:20px;
+    right:20px;
 
-    width:48px;
-    height:48px;
+    width:50px;
+    height:50px;
 
     border:none;
 
@@ -87,13 +82,13 @@ body{
 
     background:rgba(0,0,0,.45);
 
-    color:#fff;
+    color:white;
 
-    font-size:30px;
+    font-size:28px;
 
     cursor:pointer;
 
-    z-index:100;
+    z-index:999;
 
     backdrop-filter:blur(10px);
 
@@ -103,15 +98,15 @@ body{
 
 .close-button:hover{
 
-    background:rgba(255,255,255,.2);
+    transform:scale(1.1);
 
-    transform:scale(1.08);
+    background:rgba(255,255,255,.25);
 
 }
 
-/* ----------------------------
-   CLICKABLE MAP AREAS
----------------------------- */
+/* ============================
+   TRANSPARENT LINKS
+============================ */
 
 .location-link{
 
@@ -119,7 +114,7 @@ body{
 
     display:block;
 
-    border-radius:30px;
+    background:transparent;
 
     cursor:pointer;
 
@@ -127,37 +122,50 @@ body{
 
 }
 
-/* Church Get Directions */
+/* Church */
 
-.church-location {
-    left: 35.5%;
-    top: 42.8%;
-    width: 25%;
-    height: 2.8%;
+.church-location{
+
+    left:35.3%;
+    top:42.6%;
+
+    width:25%;
+    height:3%;
+
 }
 
-/* Reception Get Directions */
+/* Reception */
 
-.reception-location {
-    left: 35.5%;
-    top: 66.2%;
-    width: 25%;
-    height: 3.8%;
+.reception-location{
+
+    left:35.3%;
+    top:66.1%;
+
+    width:25%;
+    height:3%;
+
 }
 
-/* Uncomment this while adjusting positions */
+/* ==========================================
+   Uncomment while adjusting hotspot positions
+========================================== */
 
+/*
 
 .location-link{
-    background:none;
+
+background:red;
+opacity:.35;
+
 }
 
+*/
 
-@media(max-width:600px){
+/* ============================
+   MOBILE
+============================ */
 
-body{
-    padding:10px;
-}
+@media(max-width:768px){
 
 .close-button{
 
@@ -184,32 +192,43 @@ body{
 <div class="image-container">
 
 <button
+
 class="close-button"
+
 onclick="window.location.href='video.html'">
 
 &times;
 
 </button>
 
-<img src="map_image.jpeg" alt="Venue" style="object-fit:contain;">
+<img
 
+src="map_image.jpeg"
+
+alt="Venue Map">
 
 <!-- Church -->
 
 <a
+
 class="location-link church-location"
+
 href="https://www.google.com/maps/search/?api=1&query=St.+Joseph+Forane+Church+Kodakara"
-target="_blank"
-title="Open Church Location">
+
+target="_blank">
+
 </a>
 
 <!-- Reception -->
 
 <a
+
 class="location-link reception-location"
+
 href="https://www.google.com/maps/search/?api=1&query=Royal+Garden+Kuttikkad+Kerala"
-target="_blank"
-title="Open Reception Location">
+
+target="_blank">
+
 </a>
 
 </div>
