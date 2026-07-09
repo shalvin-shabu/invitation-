@@ -232,8 +232,6 @@ transform:scale(.95);
 
 class="open-btn"
 
-onclick="window.location.href='video.html'"
-
 aria-label="Open">
 
 </button>
@@ -241,9 +239,19 @@ aria-label="Open">
 </div>
 
 <script src="music.js"></script>
+<script src="petals.js"></script>
 <script>
   window.addEventListener('load', function () {
     window.initBackgroundMusic(true);
+  });
+
+  document.querySelector('.open-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    window.sessionStorage.setItem('petalFlowActive', '1');
+    window.startPetalAnimation();
+    window.setTimeout(function () {
+      window.location.href = 'video.html';
+    }, 140);
   });
 </script>
 </body>
