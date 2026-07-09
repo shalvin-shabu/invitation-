@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#000000">
-<title>Map Image</title>
+<title>Venue Map</title>
 
 <style>
 
 :root{
-    color-scheme:dark;
+    color-scheme: dark;
 }
 
 *{
@@ -30,9 +30,9 @@ body{
 
     align-items:center;
 
-    font-family:Arial, Helvetica, sans-serif;
-
     padding:20px;
+
+    font-family:Arial, Helvetica, sans-serif;
 
 }
 
@@ -41,7 +41,6 @@ body{
 .container{
 
     width:100%;
-
     max-width:900px;
 
 }
@@ -56,8 +55,7 @@ body{
 
     overflow:hidden;
 
-    box-shadow:
-    0 25px 80px rgba(0,0,0,.55);
+    box-shadow:0 25px 80px rgba(0,0,0,.55);
 
     filter:brightness(1.15);
 
@@ -69,8 +67,6 @@ body{
 
     display:block;
 
-    border-radius:24px;
-
 }
 
 /* Close Button */
@@ -80,11 +76,9 @@ body{
     position:absolute;
 
     top:18px;
-
     right:18px;
 
     width:48px;
-
     height:48px;
 
     border:none;
@@ -93,28 +87,17 @@ body{
 
     background:rgba(0,0,0,.45);
 
-    backdrop-filter:blur(12px);
-
-    -webkit-backdrop-filter:blur(12px);
-
     color:#fff;
 
-    font-size:28px;
+    font-size:30px;
 
     cursor:pointer;
 
-    display:flex;
+    z-index:100;
 
-    justify-content:center;
-
-    align-items:center;
+    backdrop-filter:blur(10px);
 
     transition:.3s;
-
-    z-index:10;
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,.35);
 
 }
 
@@ -122,39 +105,71 @@ body{
 
     background:rgba(255,255,255,.2);
 
-    transform:scale(1.1);
+    transform:scale(1.08);
 
 }
 
-.close-button:active{
+/* ----------------------------
+   CLICKABLE MAP AREAS
+---------------------------- */
 
-    transform:scale(.95);
+.location-link{
+
+    position:absolute;
+
+    display:block;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    z-index:50;
 
 }
 
-/* Mobile */
+/* Church Get Directions */
+
+.church-location {
+    left: 35.5%;
+    top: 42.8%;
+    width: 25%;
+    height: 2.8%;
+}
+
+/* Reception Get Directions */
+
+.reception-location {
+    left: 35.5%;
+    top: 66.2%;
+    width: 25%;
+    height: 3.8%;
+}
+
+/* Uncomment this while adjusting positions */
+
+
+.location-link{
+    background:rgba(255,0,0,.35);
+}
+
 
 @media(max-width:600px){
 
-    body{
+body{
+    padding:10px;
+}
 
-        padding:10px;
+.close-button{
 
-    }
+    width:42px;
+    height:42px;
 
-    .close-button{
+    font-size:24px;
 
-        width:42px;
+    top:12px;
+    right:12px;
 
-        height:42px;
-
-        font-size:24px;
-
-        top:12px;
-
-        right:12px;
-
-    }
+}
 
 }
 
@@ -166,17 +181,37 @@ body{
 
 <div class="container">
 
-    <div class="image-container">
+<div class="image-container">
 
-        <button
-            class="close-button"
-            onclick="window.location.href='video.html'">
-            &times;
-        </button>
+<button
+class="close-button"
+onclick="window.location.href='video.html'">
 
-        <img src="map_image.jpeg" alt="Map Image">
+&times;
 
-    </div>
+</button>
+
+<img src="map_image.jpeg" alt="Venue">
+
+<!-- Church -->
+
+<a
+class="location-link church-location"
+href="https://www.google.com/maps/search/?api=1&query=St.+Joseph+Forane+Church+Kodakara"
+target="_blank"
+title="Open Church Location">
+</a>
+
+<!-- Reception -->
+
+<a
+class="location-link reception-location"
+href="https://www.google.com/maps/search/?api=1&query=Royal+Garden+Kuttikkad+Kerala"
+target="_blank"
+title="Open Reception Location">
+</a>
+
+</div>
 
 </div>
 
