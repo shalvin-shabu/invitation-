@@ -91,89 +91,156 @@ body{
 }
 
 /* ===========================
-   BUTTON CONTAINER
+   TOP CARD BUTTONS — invisible tap targets aligned
+   over the three gold ornate cards already drawn at
+   the top of the background artwork.
 =========================== */
 
-.button-container{
+.top-buttons{
 
     position:absolute;
 
-    bottom:40px;
+    top:0;
+    left:0;
 
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-
-    gap:18px;
+    width:100%;
+    height:100%;
 
     z-index:10;
 
+    pointer-events:none;
+
 }
-/* ===========================
-   BUTTON STYLE
-=========================== */
 
-.button-container button{
+.card-btn{
 
-    width:120px;
-    height:100px;
+    position:absolute;
+
+    top:13%;
+
+    width:29%;
+    aspect-ratio: 1 / 1.1;
+
+    transform:translate(-50%,-50%);
 
     border:none;
+    background:transparent;
 
-    border-radius:18px;
-
-    background:rgba(255,255,255,.15);
-
-    backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
-
-    border:1px solid rgba(255,255,255,.25);
-
-    color:white;
-
-    font-family:'Cinzel',serif;
-
-    font-size:15px;
-
-    font-weight:600;
+    color:transparent;
+    font-size:0;
 
     cursor:pointer;
 
-    transition:.35s;
+    pointer-events:auto;
 
-    display:flex;
+    border-radius:16px;
 
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:8px;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.35);
+    overflow:hidden;
 
 }
 
-.button-container button:hover{
+.card-btn:active{
 
-    background:rgba(255,215,120,.30);
-
-    transform:translateY(-5px);
-
-    box-shadow:
-        0 0 20px rgba(255,215,120,.5);
+    transform:translate(-50%,-50%) scale(.97);
 
 }
 
-.button-container button:active{
+.card-btn.invitation{ left:20%; }
+.card-btn.maps{ left:51%; }
+.card-btn.event-flow{ left:82%; }
 
-    transform:scale(.96);
+/* ===========================
+   IDLE WATERY GLOW / RIPPLE
+   (continuous, subtle, follows the card outline)
+=========================== */
+
+.card-btn::before,
+.card-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:6%;
+
+    border-radius:45% 45% 10px 10px / 25% 25% 10px 10px;
+
+    border:1.5px solid rgba(210,235,255,.55);
+
+    box-shadow:0 0 10px 2px rgba(180,220,255,.22) inset;
+
+    animation:idle-ripple 3s ease-out infinite;
+
+    pointer-events:none;
 
 }
+
+.card-btn::after{
+
+    animation-delay:1.5s;
+
+}
+
+@keyframes idle-ripple{
+
+    0%{
+
+        transform:scale(.97);
+        opacity:.8;
+
+    }
+
+    70%{
+
+        opacity:.15;
+
+    }
+
+    100%{
+
+        transform:scale(1.04);
+        opacity:0;
+
+    }
+
+}
+
+/* ===========================
+   WATER RIPPLE ON TOUCH
+=========================== */
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:radial-gradient(
+        circle,
+        rgba(210,235,255,.55) 0%,
+        rgba(150,210,255,.28) 45%,
+        transparent 75%
+    );
+
+    transform:scale(0);
+
+    pointer-events:none;
+
+    animation:ripple-anim .7s ease-out forwards;
+
+}
+
+@keyframes ripple-anim{
+
+    to{
+
+        transform:scale(1);
+        opacity:0;
+
+    }
+
+}
+
 /* ===========================
    GLOW ANIMATION
 =========================== */
@@ -209,22 +276,6 @@ transform:translateX(-50%) scale(.95);
 
 @media(max-width:768px){
 
-.button-container{
-
-    width:90%;
-
-    flex-direction:column;
-
-}
-
-.button-container button{
-
-    width:100%;
-
-    font-size:16px;
-
-}
-
 .glow{
 
     width:350px;
@@ -254,21 +305,16 @@ transform:translateX(-50%) scale(.95);
 
 <div class="glow"></div>
 
-<!-- Buttons -->
+<!-- Buttons — aligned over the Invitation / Maps / Event Flow
+     cards already printed at the top of the background image -->
 
-<div class="button-container">
+<div class="top-buttons">
 
-    <button onclick="window.location.href='invitation-image.html'">
-        ✉ Invitation
-    </button>
+    <button class="card-btn invitation" onclick="window.location.href='invitation-image.html'" aria-label="Invitation"></button>
 
-    <button onclick="window.location.href='map_image.html'">
-        📍 Maps
-    </button>
+    <button class="card-btn maps" onclick="window.location.href='map_image.html'" aria-label="Maps"></button>
 
-    <button onclick="window.location.href='event_image.html'">
-        📅 Event Flow
-    </button>
+    <button class="card-btn event-flow" onclick="window.location.href='event_image.html'" aria-label="Event Flow"></button>
 
 </div>
 
@@ -288,6 +334,34 @@ document.addEventListener("click", function(){
     }
 
 },{once:true});
+
+// Water ripple effect on touch/click for the card buttons
+document.querySelectorAll(".card-btn").forEach(function(btn){
+
+    btn.addEventListener("pointerdown", function(e){
+
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height) * 1.5;
+
+        const x = (e.clientX ?? rect.left + rect.width / 2) - rect.left;
+        const y = (e.clientY ?? rect.top + rect.height / 2) - rect.top;
+
+        const ripple = document.createElement("span");
+        ripple.className = "ripple";
+        ripple.style.width = size + "px";
+        ripple.style.height = size + "px";
+        ripple.style.left = (x - size / 2) + "px";
+        ripple.style.top = (y - size / 2) + "px";
+
+        btn.appendChild(ripple);
+
+        ripple.addEventListener("animationend", function(){
+            ripple.remove();
+        });
+
+    });
+
+});
 
 </script>
 
