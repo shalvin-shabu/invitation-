@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#000000">
 
 <title>Holy Baptism Invitation</title>
@@ -27,11 +27,32 @@ body{
 
 body{
     background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ==========================================
+   FIXED-ASPECT FRAME
+   Keeps background + buttons + countdown
+   perfectly aligned on any screen size,
+   instead of stretching to the raw viewport.
+   ========================================== */
+
+.phone-frame{
+
     position:relative;
+
+    overflow:hidden;
+
+    /* 9:16 frame that always fits fully on screen */
+    width:min(100vw, calc(100vh * 9 / 16));
+    height:min(100vh, calc(100vw * 16 / 9));
+
 }
 
 .background{
-    position:fixed;
+    position:absolute;
     inset:0;
 
     background:url("bg_image.jpeg") center center no-repeat;
@@ -58,8 +79,8 @@ body{
 
     transform:translateX(-50%);
 
-    width:500px;
-    height:500px;
+    width:60%;
+    aspect-ratio:1/1;
 
     border-radius:50%;
 
@@ -245,7 +266,7 @@ transform:translateX(-50%) scale(.95);
 }
 
 /*==========================================
-    COUNTDOWN STYLES (Elegant & Responsive) - REDUCED SIZE
+    COUNTDOWN STYLES (Elegant & Responsive)
 ============================================*/
 
 .countdown-section {
@@ -369,11 +390,6 @@ transform:translateX(-50%) scale(.95);
 /* Responsive Overrides */
 @media(max-width:768px){
 
-.glow{
-    width:350px;
-    height:350px;
-}
-
 .countdown-section {
     top: 48%;
 }
@@ -403,61 +419,65 @@ transform:translateX(-50%) scale(.95);
     <source src="bg_music.mpeg" type="audio/mpeg">
 </audio>
 
-<div class="background"></div>
+<div class="phone-frame">
 
-<div class="overlay"></div>
+    <div class="background"></div>
 
-<div class="glow"></div>
+    <div class="overlay"></div>
 
-<div class="top-buttons">
+    <div class="glow"></div>
 
-    <button class="card-btn invitation" onclick="window.location.href='invitation-image.html'" aria-label="Invitation"></button>
+    <div class="top-buttons">
 
-    <button class="card-btn maps" onclick="window.location.href='map_image.html'" aria-label="Maps"></button>
+        <button class="card-btn invitation" onclick="window.location.href='invitation-image.html'" aria-label="Invitation"></button>
 
-    <button class="card-btn event-flow" onclick="window.location.href='event_image.html'" aria-label="Event Flow"></button>
+        <button class="card-btn maps" onclick="window.location.href='map_image.html'" aria-label="Maps"></button>
 
-</div>
-
-<!-- ==========================================
-     COUNTDOWN SECTION (Inserted below the buttons)
-     ========================================== -->
-<div class="countdown-section">
-
-    <div class="countdown-title">
-        TIME COUNTDOWN
-    </div>
-
-    <div class="countdown-glow-wrap">
-    <div id="countdown">
-
-        <div class="time-box">
-            <span id="days">00</span>
-            <small>DAYS</small>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="time-box">
-            <span id="hours">00</span>
-            <small>HOURS</small>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="time-box">
-            <span id="minutes">00</span>
-            <small>MINUTES</small>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="time-box">
-            <span id="seconds">00</span>
-            <small>SECONDS</small>
-        </div>
+        <button class="card-btn event-flow" onclick="window.location.href='event_image.html'" aria-label="Event Flow"></button>
 
     </div>
+
+    <!-- ==========================================
+         COUNTDOWN SECTION
+         ========================================== -->
+    <div class="countdown-section">
+
+        <div class="countdown-title">
+            TIME COUNTDOWN
+        </div>
+
+        <div class="countdown-glow-wrap">
+        <div id="countdown">
+
+            <div class="time-box">
+                <span id="days">00</span>
+                <small>DAYS</small>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="time-box">
+                <span id="hours">00</span>
+                <small>HOURS</small>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <small>MINUTES</small>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <small>SECONDS</small>
+            </div>
+
+        </div>
+        </div>
+
     </div>
 
 </div>
