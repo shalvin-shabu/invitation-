@@ -11,6 +11,18 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 
 <style>
 
+:root{
+    /* Nudge these to line up exactly with the OPEN circle
+       printed in your image, then adjust nothing else. */
+    --btn-top:88%;
+    --btn-left:50%;
+    --btn-size:90px;
+    --btn-size-mobile:82px;
+    --line-width:100px;
+    --line-width-mobile:55px;
+    --line-gap:22px;
+}
+
 *{
     margin:0;
     padding:0;
@@ -62,7 +74,7 @@ body{
 
     background-color:#000;
 
-    filter:brightness(1.7);
+    filter: brightness(1.3);
 
 }
 
@@ -101,96 +113,122 @@ body{
 /* ============================
    OPEN BUTTON
 ============================ */
-
 .open-btn-wrap{
 
     position:absolute;
 
-    left:49%;
-
-    top:88%;
-
+    left:var(--btn-left);
+    top:var(--btn-top);
     transform:translate(-50%,-50%);
 
     z-index:10;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+}
+
+/* Left & Right decorative lines */
+
+.open-btn-wrap::before,
+.open-btn-wrap::after{
+
+    content:"";
+    position:absolute;
+    top:50%;
+    width:var(--line-width);
+    height:3px;
+
+    background:linear-gradient(
+        to right,
+        transparent,
+        rgba(255,225,170,1)
+    );
+
+    box-shadow:0 0 8px rgba(255,210,140,.9);
+
+    transform:translateY(-50%);
+}
+
+.open-btn-wrap::before{
+
+    right:100%;
+    margin-right:var(--line-gap);
+
+}
+
+.open-btn-wrap::after{
+
+    left:100%;
+    margin-left:var(--line-gap);
+    transform:translateY(-50%) scaleX(-1);
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.open-btn-wrap::before,
+.open-btn-wrap::after{
+
+    width:var(--line-width-mobile);
+
+}
+
+}
+@keyframes glowPulse{
+
+0%,100%{
+
+box-shadow:0 0 14px rgba(255,205,140,.55);
+
+transform:scale(1);
+
+}
+
+50%{
+
+box-shadow:0 0 26px rgba(255,215,150,.9);
+
+transform:scale(1.04);
+
+}
 
 }
 
 .open-btn{
 
-    width:110px;
+    width:var(--btn-size);
 
-    height:110px;
-
-    border:none;
+    height:var(--btn-size);
 
     border-radius:50%;
 
     background:transparent;
 
+    border:2px solid rgba(255,225,175,.75);
+
     cursor:pointer;
 
-    position:relative;
-
-    -webkit-tap-highlight-color:transparent;
-
-    outline:none;
-
-}
-
-/* Pulse */
-
-.open-btn::before,
-
-.open-btn::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:-8px;
-
-    border-radius:50%;
-
-    border:2px solid rgba(255,215,180,.55);
-
-    animation:ring 2.2s infinite;
-
-}
-
-.open-btn::after{
-
-    animation-delay:1.1s;
-
-}
-
-@keyframes ring{
-
-0%{
-
-transform:scale(.85);
-
-opacity:1;
-
-}
-
-100%{
-
-transform:scale(1.4);
-
-opacity:0;
-
-}
+    animation:glowPulse 2.2s ease-in-out infinite;
 
 }
 
 .open-btn:hover{
 
-transform:scale(1.05);
+animation-play-state:paused;
+
+transform:scale(1.08);
+
+box-shadow:0 0 26px rgba(255,215,150,.9);
 
 }
 
 .open-btn:active{
+
+animation-play-state:paused;
 
 transform:scale(.95);
 
@@ -202,15 +240,15 @@ transform:scale(.95);
 
 .open-btn{
 
-    width:82px;
+    width:var(--btn-size-mobile);
 
-    height:82px;
+    height:var(--btn-size-mobile);
 
 }
 
 .open-btn-wrap{
 
-    top:88%;
+    top:var(--btn-top);
 
 }
 
@@ -245,14 +283,25 @@ aria-label="Open">
     window.initBackgroundMusic(true);
   });
 
-  document.querySelector('.open-btn').addEventListener('click', function (event) {
-    event.preventDefault();
+  var hasNavigated = false;
+
+  function goToVideo() {
+    if (hasNavigated) return;
+    hasNavigated = true;
     window.sessionStorage.setItem('petalFlowActive', '1');
     window.startPetalAnimation();
     window.setTimeout(function () {
       window.location.href = 'video.html';
     }, 140);
+  }
+
+  document.querySelector('.open-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    goToVideo();
   });
+
+  // Auto-open after 20 seconds in case the visitor doesn't notice/click the button
+  window.setTimeout(goToVideo, 20000);
 </script>
 </body>
 
