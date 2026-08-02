@@ -316,34 +316,52 @@ transform:translateX(-50%) scale(.95);
 /* Soft golden glow panel behind the numbers */
 .countdown-glow-wrap {
     position: relative;
+    z-index: 1;
     display: inline-block;
-    padding: 6px 14px;
+    padding: 10px 20px;
 }
 
 .countdown-glow-wrap::before {
     content: "";
     position: absolute;
-    inset: -22px -18px;
+    inset: -30px -26px;
     background: radial-gradient(
         ellipse at center,
-        rgba(255, 235, 190, 0.75) 0%,
-        rgba(255, 220, 150, 0.4) 45%,
-        transparent 75%
+        rgba(255, 240, 200, 0.9) 0%,
+        rgba(255, 220, 150, 0.55) 40%,
+        rgba(255, 200, 120, 0.2) 65%,
+        transparent 80%
     );
-    filter: blur(28px);
+    filter: blur(22px);
     z-index: -1;
     border-radius: 50%;
     animation: countdown-glow-pulse 3.5s ease-in-out infinite;
 }
 
+.countdown-glow-wrap::after {
+    content: "";
+    position: absolute;
+    inset: -6px -4px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 250, 225, 0.6) 0%,
+        transparent 70%
+    );
+    filter: blur(8px);
+    z-index: -1;
+    border-radius: 50%;
+    animation: countdown-glow-pulse 3.5s ease-in-out infinite;
+    animation-delay: .2s;
+}
+
 @keyframes countdown-glow-pulse {
     0%, 100% {
-        opacity: .7;
-        transform: scale(.96);
+        opacity: .65;
+        transform: scale(.94);
     }
     50% {
         opacity: 1;
-        transform: scale(1.08);
+        transform: scale(1.1);
     }
 }
 
