@@ -323,16 +323,28 @@ transform:translateX(-50%) scale(.95);
 .countdown-glow-wrap::before {
     content: "";
     position: absolute;
-    inset: -10px -6px;
+    inset: -22px -18px;
     background: radial-gradient(
         ellipse at center,
-        rgba(255, 235, 190, 0.55) 0%,
-        rgba(255, 220, 150, 0.25) 45%,
+        rgba(255, 235, 190, 0.75) 0%,
+        rgba(255, 220, 150, 0.4) 45%,
         transparent 75%
     );
-    filter: blur(24px);
+    filter: blur(28px);
     z-index: -1;
     border-radius: 50%;
+    animation: countdown-glow-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes countdown-glow-pulse {
+    0%, 100% {
+        opacity: .7;
+        transform: scale(.96);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
 }
 
 #countdown {
@@ -502,6 +514,12 @@ transform:translateX(-50%) scale(.95);
     const stage = document.getElementById("stage");
     const img = stage.querySelector(".background");
 
+    // Small expand factor: scales the stage slightly beyond a strict
+    // "contain" fit so the thin black bars on the sides get filled in.
+    // A tiny bit of the image edges gets cropped by #stage's overflow:hidden,
+    // but nothing near the buttons/countdown, which stay centered.
+    const EXPAND = 1.08;
+
     function fitStage() {
         const naturalW = img.naturalWidth;
         const naturalH = img.naturalHeight;
@@ -510,7 +528,7 @@ transform:translateX(-50%) scale(.95);
         const winW = window.innerWidth;
         const winH = window.innerHeight;
 
-        const scale = Math.min(winW / naturalW, winH / naturalH);
+        const scale = Math.min(winW / naturalW, winH / naturalH) * EXPAND;
 
         stage.style.width = Math.round(naturalW * scale) + "px";
         stage.style.height = Math.round(naturalH * scale) + "px";
